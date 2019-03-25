@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HeartDiseasePredictionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HeartDiseasePrediction.dbo.ChestPainTypes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ChestPainTypes">
+          <Key>
+            <PropertyRef Name="IDchestPaintype" />
+          </Key>
+          <Property Name="IDchestPaintype" Type="int" Nullable="false" />
+          <Property Name="ChestPainName" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HeartDiseasePrediction.dbo.HDPModels' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HDPModels">
+          <Key>
+            <PropertyRef Name="Idmodel" />
+            <PropertyRef Name="ModelName" />
+            <PropertyRef Name="model" />
+          </Key>
+          <Property Name="Idmodel" Type="int" Nullable="false" />
+          <Property Name="ModelName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="model" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HeartDiseasePrediction.dbo.HeartDiseaseTrainingSet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HeartDiseaseTrainingSet">
+          <Key>
+            <PropertyRef Name="IdPatient" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="IsWoman" />
+            <PropertyRef Name="IdChestPainType" />
+            <PropertyRef Name="RestingBloodPreasure" />
+            <PropertyRef Name="cholestoral" />
+            <PropertyRef Name="FastingBloodSugar" />
+            <PropertyRef Name="RestingElectrocardiographicResults" />
+            <PropertyRef Name="MaxHeartRateAchived" />
+            <PropertyRef Name="ExcerciseInducedAngina" />
+            <PropertyRef Name="Oldpeak" />
+            <PropertyRef Name="Slope" />
+            <PropertyRef Name="NumberOfMajorVessels" />
+            <PropertyRef Name="Thal" />
+            <PropertyRef Name="Target" />
+          </Key>
+          <Property Name="IdPatient" Type="int" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="IsWoman" Type="int" Nullable="false" />
+          <Property Name="IdChestPainType" Type="int" Nullable="false" />
+          <Property Name="RestingBloodPreasure" Type="int" Nullable="false" />
+          <Property Name="cholestoral" Type="int" Nullable="false" />
+          <Property Name="FastingBloodSugar" Type="int" Nullable="false" />
+          <Property Name="RestingElectrocardiographicResults" Type="int" Nullable="false" />
+          <Property Name="MaxHeartRateAchived" Type="int" Nullable="false" />
+          <Property Name="ExcerciseInducedAngina" Type="int" Nullable="false" />
+          <Property Name="Oldpeak" Type="float" Nullable="false" />
+          <Property Name="Slope" Type="int" Nullable="false" />
+          <Property Name="NumberOfMajorVessels" Type="int" Nullable="false" />
+          <Property Name="Thal" Type="int" Nullable="false" />
+          <Property Name="Target" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HeartDiseasePrediction.dbo.RestingElectroCardiographicResults' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="RestingElectroCardiographicResults">
+          <Key>
+            <PropertyRef Name="IdREC" />
+          </Key>
+          <Property Name="IdREC" Type="int" Nullable="false" />
+          <Property Name="ResultName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="principal_id" />
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Function Name="HDPFE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdChestPainType" Type="int" Mode="In" />
+          <Parameter Name="MaxHeartRateAchived" Type="float" Mode="In" />
+          <Parameter Name="Oldpeak" Type="float" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="IdChestPainType" Type="int" />
+                <Property Name="MaxHeartRateAchived" Type="float" />
+                <Property Name="Oldpeak" Type="float" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="ModelTraining" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="trained_model" Type="varbinary(max)" Mode="InOut" />
+        </Function>
+        <Function Name="Prediction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="model" Type="varchar" Mode="In" />
+          <Parameter Name="IdChestPaintype" Type="int" Mode="In" />
+          <Parameter Name="MaxHeartRateAchived" Type="int" Mode="In" />
+          <Parameter Name="Oldpeak" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="HeartDiseasePredictionModelStoreContainer">
+          <EntitySet Name="ChestPainTypes" EntityType="Self.ChestPainTypes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ChestPainTypes].[IDchestPaintype] AS [IDchestPaintype], 
+    [ChestPainTypes].[ChestPainName] AS [ChestPainName]
+    FROM [dbo].[ChestPainTypes] AS [ChestPainTypes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="HDPModels" EntityType="Self.HDPModels" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HDPModels].[Idmodel] AS [Idmodel], 
+    [HDPModels].[ModelName] AS [ModelName], 
+    [HDPModels].[model] AS [model]
+    FROM [dbo].[HDPModels] AS [HDPModels]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="HeartDiseaseTrainingSet" EntityType="Self.HeartDiseaseTrainingSet" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HeartDiseaseTrainingSet].[IdPatient] AS [IdPatient], 
+    [HeartDiseaseTrainingSet].[Age] AS [Age], 
+    [HeartDiseaseTrainingSet].[IsWoman] AS [IsWoman], 
+    [HeartDiseaseTrainingSet].[IdChestPainType] AS [IdChestPainType], 
+    [HeartDiseaseTrainingSet].[RestingBloodPreasure] AS [RestingBloodPreasure], 
+    [HeartDiseaseTrainingSet].[cholestoral] AS [cholestoral], 
+    [HeartDiseaseTrainingSet].[FastingBloodSugar] AS [FastingBloodSugar], 
+    [HeartDiseaseTrainingSet].[RestingElectrocardiographicResults] AS [RestingElectrocardiographicResults], 
+    [HeartDiseaseTrainingSet].[MaxHeartRateAchived] AS [MaxHeartRateAchived], 
+    [HeartDiseaseTrainingSet].[ExcerciseInducedAngina] AS [ExcerciseInducedAngina], 
+    [HeartDiseaseTrainingSet].[Oldpeak] AS [Oldpeak], 
+    [HeartDiseaseTrainingSet].[Slope] AS [Slope], 
+    [HeartDiseaseTrainingSet].[NumberOfMajorVessels] AS [NumberOfMajorVessels], 
+    [HeartDiseaseTrainingSet].[Thal] AS [Thal], 
+    [HeartDiseaseTrainingSet].[Target] AS [Target]
+    FROM [dbo].[HeartDiseaseTrainingSet] AS [HeartDiseaseTrainingSet]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RestingElectroCardiographicResults" EntityType="Self.RestingElectroCardiographicResults" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [RestingElectroCardiographicResults].[IdREC] AS [IdREC], 
+    [RestingElectroCardiographicResults].[ResultName] AS [ResultName]
+    FROM [dbo].[RestingElectroCardiographicResults] AS [RestingElectroCardiographicResults]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sysdiagrams].[name] AS [name], 
+    [sysdiagrams].[principal_id] AS [principal_id], 
+    [sysdiagrams].[diagram_id] AS [diagram_id], 
+    [sysdiagrams].[version] AS [version], 
+    [sysdiagrams].[definition] AS [definition]
+    FROM [dbo].[sysdiagrams] AS [sysdiagrams]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HeartDiseasePredictionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="HDPFE_Result">
+          <Property Name="IdChestPainType" Type="Int32" />
+          <Property Name="MaxHeartRateAchived" Type="Double" />
+          <Property Name="Oldpeak" Type="Double" />
+        </ComplexType>
+        <EntityType Name="ChestPainType">
+          <Key>
+            <PropertyRef Name="IDchestPaintype" />
+          </Key>
+          <Property Name="IDchestPaintype" Type="Int32" Nullable="false" />
+          <Property Name="ChestPainName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HDPModel">
+          <Key>
+            <PropertyRef Name="Idmodel" />
+            <PropertyRef Name="ModelName" />
+            <PropertyRef Name="model" />
+          </Key>
+          <Property Name="Idmodel" Type="Int32" Nullable="false" />
+          <Property Name="ModelName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HeartDiseaseTrainingSet">
+          <Key>
+            <PropertyRef Name="IdPatient" />
+            <PropertyRef Name="Age" />
+            <PropertyRef Name="IsWoman" />
+            <PropertyRef Name="IdChestPainType" />
+            <PropertyRef Name="RestingBloodPreasure" />
+            <PropertyRef Name="cholestoral" />
+            <PropertyRef Name="FastingBloodSugar" />
+            <PropertyRef Name="RestingElectrocardiographicResults" />
+            <PropertyRef Name="MaxHeartRateAchived" />
+            <PropertyRef Name="ExcerciseInducedAngina" />
+            <PropertyRef Name="Oldpeak" />
+            <PropertyRef Name="Slope" />
+            <PropertyRef Name="NumberOfMajorVessels" />
+            <PropertyRef Name="Thal" />
+            <PropertyRef Name="Target" />
+          </Key>
+          <Property Name="IdPatient" Type="Int32" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="IsWoman" Type="Int32" Nullable="false" />
+          <Property Name="IdChestPainType" Type="Int32" Nullable="false" />
+          <Property Name="RestingBloodPreasure" Type="Int32" Nullable="false" />
+          <Property Name="cholestoral" Type="Int32" Nullable="false" />
+          <Property Name="FastingBloodSugar" Type="Int32" Nullable="false" />
+          <Property Name="RestingElectrocardiographicResults" Type="Int32" Nullable="false" />
+          <Property Name="MaxHeartRateAchived" Type="Int32" Nullable="false" />
+          <Property Name="ExcerciseInducedAngina" Type="Int32" Nullable="false" />
+          <Property Name="Oldpeak" Type="Double" Nullable="false" />
+          <Property Name="Slope" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfMajorVessels" Type="Int32" Nullable="false" />
+          <Property Name="Thal" Type="Int32" Nullable="false" />
+          <Property Name="Target" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RestingElectroCardiographicResult">
+          <Key>
+            <PropertyRef Name="IdREC" />
+          </Key>
+          <Property Name="IdREC" Type="Int32" Nullable="false" />
+          <Property Name="ResultName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="name" />
+            <PropertyRef Name="principal_id" />
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="HeartDiseasePredictionEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChestPainTypes" EntityType="Self.ChestPainType" />
+          <EntitySet Name="HDPModels" EntityType="Self.HDPModel" />
+          <EntitySet Name="HeartDiseaseTrainingSets" EntityType="Self.HeartDiseaseTrainingSet" />
+          <EntitySet Name="RestingElectroCardiographicResults" EntityType="Self.RestingElectroCardiographicResult" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <FunctionImport Name="HDPFE" IsComposable="true" ReturnType="Collection(HeartDiseasePredictionModel.HDPFE_Result)">
+            <Parameter Name="IdChestPainType" Mode="In" Type="Int32" />
+            <Parameter Name="MaxHeartRateAchived" Mode="In" Type="Double" />
+            <Parameter Name="Oldpeak" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="ModelTraining">
+            <Parameter Name="trained_model" Mode="InOut" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="Prediction" ReturnType="Collection(Double)">
+            <Parameter Name="model" Mode="In" Type="String" />
+            <Parameter Name="IdChestPaintype" Mode="In" Type="Int32" />
+            <Parameter Name="MaxHeartRateAchived" Mode="In" Type="Int32" />
+            <Parameter Name="Oldpeak" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HeartDiseasePredictionModelStoreContainer" CdmEntityContainer="HeartDiseasePredictionEntities1">
+          <EntitySetMapping Name="ChestPainTypes">
+            <EntityTypeMapping TypeName="HeartDiseasePredictionModel.ChestPainType">
+              <MappingFragment StoreEntitySet="ChestPainTypes">
+                <ScalarProperty Name="IDchestPaintype" ColumnName="IDchestPaintype" />
+                <ScalarProperty Name="ChestPainName" ColumnName="ChestPainName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HDPModels">
+            <EntityTypeMapping TypeName="HeartDiseasePredictionModel.HDPModel">
+              <MappingFragment StoreEntitySet="HDPModels">
+                <ScalarProperty Name="Idmodel" ColumnName="Idmodel" />
+                <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+                <ScalarProperty Name="model" ColumnName="model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HeartDiseaseTrainingSets">
+            <EntityTypeMapping TypeName="HeartDiseasePredictionModel.HeartDiseaseTrainingSet">
+              <MappingFragment StoreEntitySet="HeartDiseaseTrainingSet">
+                <ScalarProperty Name="IdPatient" ColumnName="IdPatient" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="IsWoman" ColumnName="IsWoman" />
+                <ScalarProperty Name="IdChestPainType" ColumnName="IdChestPainType" />
+                <ScalarProperty Name="RestingBloodPreasure" ColumnName="RestingBloodPreasure" />
+                <ScalarProperty Name="cholestoral" ColumnName="cholestoral" />
+                <ScalarProperty Name="FastingBloodSugar" ColumnName="FastingBloodSugar" />
+                <ScalarProperty Name="RestingElectrocardiographicResults" ColumnName="RestingElectrocardiographicResults" />
+                <ScalarProperty Name="MaxHeartRateAchived" ColumnName="MaxHeartRateAchived" />
+                <ScalarProperty Name="ExcerciseInducedAngina" ColumnName="ExcerciseInducedAngina" />
+                <ScalarProperty Name="Oldpeak" ColumnName="Oldpeak" />
+                <ScalarProperty Name="Slope" ColumnName="Slope" />
+                <ScalarProperty Name="NumberOfMajorVessels" ColumnName="NumberOfMajorVessels" />
+                <ScalarProperty Name="Thal" ColumnName="Thal" />
+                <ScalarProperty Name="Target" ColumnName="Target" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RestingElectroCardiographicResults">
+            <EntityTypeMapping TypeName="HeartDiseasePredictionModel.RestingElectroCardiographicResult">
+              <MappingFragment StoreEntitySet="RestingElectroCardiographicResults">
+                <ScalarProperty Name="IdREC" ColumnName="IdREC" />
+                <ScalarProperty Name="ResultName" ColumnName="ResultName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HeartDiseasePredictionModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="HeartDiseasePredictionModel.Store.HDPFE" FunctionImportName="HDPFE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HeartDiseasePredictionModel.HDPFE_Result">
+                <ScalarProperty Name="IdChestPainType" ColumnName="IdChestPainType" />
+                <ScalarProperty Name="MaxHeartRateAchived" ColumnName="MaxHeartRateAchived" />
+                <ScalarProperty Name="Oldpeak" ColumnName="Oldpeak" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ModelTraining" FunctionName="HeartDiseasePredictionModel.Store.ModelTraining" />
+          <FunctionImportMapping FunctionImportName="Prediction" FunctionName="HeartDiseasePredictionModel.Store.Prediction" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
