@@ -16,14 +16,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Heart Disease Prediction", "index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Heart Disease Prediction", "Index", "Users", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("DS", "index", "Home")</li>
-                </ul>
-            </div>
-        </div>
+               </div>
     </div>
     <div class="container body-content">
         @RenderBody()

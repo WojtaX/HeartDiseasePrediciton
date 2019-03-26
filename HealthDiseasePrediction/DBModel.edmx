@@ -104,9 +104,7 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
         </Function>
         <Function Name="Prediction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="model" Type="varchar" Mode="In" />
-          <Parameter Name="IdChestPaintype" Type="int" Mode="In" />
-          <Parameter Name="MaxHeartRateAchived" Type="int" Mode="In" />
-          <Parameter Name="Oldpeak" Type="int" Mode="In" />
+          <Parameter Name="query" Type="nvarchar(max)" Mode="In" />
         </Function>
         <EntityContainer Name="HeartDiseasePredictionModelStoreContainer">
           <EntitySet Name="ChestPainTypes" EntityType="Self.ChestPainTypes" store:Type="Tables" store:Schema="dbo">
@@ -237,7 +235,7 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityContainer Name="HeartDiseasePredictionEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="HeartDiseasePredictionEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ChestPainTypes" EntityType="Self.ChestPainType" />
           <EntitySet Name="HDPModels" EntityType="Self.HDPModel" />
           <EntitySet Name="HeartDiseaseTrainingSets" EntityType="Self.HeartDiseaseTrainingSet" />
@@ -251,11 +249,9 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
           <FunctionImport Name="ModelTraining">
             <Parameter Name="trained_model" Mode="InOut" Type="Binary" />
           </FunctionImport>
-          <FunctionImport Name="Prediction" ReturnType="Collection(Double)">
+          <FunctionImport Name="Prediction">
             <Parameter Name="model" Mode="In" Type="String" />
-            <Parameter Name="IdChestPaintype" Mode="In" Type="Int32" />
-            <Parameter Name="MaxHeartRateAchived" Mode="In" Type="Int32" />
-            <Parameter Name="Oldpeak" Mode="In" Type="Int32" />
+            <Parameter Name="query" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
@@ -263,7 +259,7 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HeartDiseasePredictionModelStoreContainer" CdmEntityContainer="HeartDiseasePredictionEntities1">
+        <EntityContainerMapping StorageEntityContainer="HeartDiseasePredictionModelStoreContainer" CdmEntityContainer="HeartDiseasePredictionEntities3">
           <EntitySetMapping Name="ChestPainTypes">
             <EntityTypeMapping TypeName="HeartDiseasePredictionModel.ChestPainType">
               <MappingFragment StoreEntitySet="ChestPainTypes">

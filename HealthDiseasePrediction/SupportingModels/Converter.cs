@@ -11,7 +11,7 @@ namespace HealthDiseasePrediction.Models
         public static  List<SelectListItem> ConvertData()
         {
             List<ChestPainType> P = new List<ChestPainType>();
-            using (HeartDiseasePredictionEntities1 db = new HeartDiseasePredictionEntities1())
+            using (HeartDiseasePredictionEntities3 db = new HeartDiseasePredictionEntities3())
             {
                 var query = db.ChestPainTypes.SqlQuery("Select * from ChestPainTypes;").ToList();
                 if (query != null)

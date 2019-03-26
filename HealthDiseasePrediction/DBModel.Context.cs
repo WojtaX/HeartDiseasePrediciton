@@ -15,10 +15,10 @@ namespace HealthDiseasePrediction
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class HeartDiseasePredictionEntities1 : DbContext
+    public partial class HeartDiseasePredictionEntities3 : DbContext
     {
-        public HeartDiseasePredictionEntities1()
-            : base("name=HeartDiseasePredictionEntities1")
+        public HeartDiseasePredictionEntities3()
+            : base("name=HeartDiseasePredictionEntities3")
         {
         }
     
@@ -33,7 +33,7 @@ namespace HealthDiseasePrediction
         public virtual DbSet<RestingElectroCardiographicResult> RestingElectroCardiographicResults { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     
-        [DbFunction("HeartDiseasePredictionEntities1", "HDPFE")]
+        [DbFunction("HeartDiseasePredictionEntities3", "HDPFE")]
         public virtual IQueryable<HDPFE_Result> HDPFE(Nullable<int> idChestPainType, Nullable<double> maxHeartRateAchived, Nullable<double> oldpeak)
         {
             var idChestPainTypeParameter = idChestPainType.HasValue ?
@@ -48,7 +48,7 @@ namespace HealthDiseasePrediction
                 new ObjectParameter("Oldpeak", oldpeak) :
                 new ObjectParameter("Oldpeak", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<HDPFE_Result>("[HeartDiseasePredictionEntities1].[HDPFE](@IdChestPainType, @MaxHeartRateAchived, @Oldpeak)", idChestPainTypeParameter, maxHeartRateAchivedParameter, oldpeakParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<HDPFE_Result>("[HeartDiseasePredictionEntities3].[HDPFE](@IdChestPainType, @MaxHeartRateAchived, @Oldpeak)", idChestPainTypeParameter, maxHeartRateAchivedParameter, oldpeakParameter);
         }
     
         public virtual int ModelTraining(ObjectParameter trained_model)
@@ -56,25 +56,17 @@ namespace HealthDiseasePrediction
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModelTraining", trained_model);
         }
     
-        public virtual ObjectResult<Nullable<double>> Prediction(string model, Nullable<int> idChestPaintype, Nullable<int> maxHeartRateAchived, Nullable<int> oldpeak)
+        public virtual int Prediction(string model, string query)
         {
             var modelParameter = model != null ?
                 new ObjectParameter("model", model) :
                 new ObjectParameter("model", typeof(string));
     
-            var idChestPaintypeParameter = idChestPaintype.HasValue ?
-                new ObjectParameter("IdChestPaintype", idChestPaintype) :
-                new ObjectParameter("IdChestPaintype", typeof(int));
+            var queryParameter = query != null ?
+                new ObjectParameter("query", query) :
+                new ObjectParameter("query", typeof(string));
     
-            var maxHeartRateAchivedParameter = maxHeartRateAchived.HasValue ?
-                new ObjectParameter("MaxHeartRateAchived", maxHeartRateAchived) :
-                new ObjectParameter("MaxHeartRateAchived", typeof(int));
-    
-            var oldpeakParameter = oldpeak.HasValue ?
-                new ObjectParameter("Oldpeak", oldpeak) :
-                new ObjectParameter("Oldpeak", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("Prediction", modelParameter, idChestPaintypeParameter, maxHeartRateAchivedParameter, oldpeakParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Prediction", modelParameter, queryParameter);
         }
     }
 }

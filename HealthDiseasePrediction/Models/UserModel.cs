@@ -5,17 +5,23 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-
-
 namespace HealthDiseasePrediction.Models
 {
     public class UserModel
     {
+        [Display(Name ="Type your Heart pain Type")]
+        [Range(1, 4, ErrorMessage = "We don't have this heart pain")]
+        private int idChestPainType;
+    
+        public int IdChestPainType
+        {
+            get { return idChestPainType; }
+            set {
+                Convert.ToInt16(value);
+                idChestPainType = value;
+            }
+        }
         
-        //[Display(Name ="Type your Heart pain Type")]
-        [Range(1, 4, ErrorMessage = "We don't have this heart pain ")]
-        public int IdChestPainType { get; set; }
-
         [Range(30, 230, ErrorMessage = "Hiroshima xD")]
         [Required(ErrorMessage = "Give a valid heart rate")]
         public float MaxHeartRateAchived { get; set; }
@@ -26,11 +32,7 @@ namespace HealthDiseasePrediction.Models
 
 
 
-        public float predictedValue { get; set; }
-
-
-
-
+        public string predictedValue { get; set; }
 
     }
 }
