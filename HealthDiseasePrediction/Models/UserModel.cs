@@ -11,6 +11,7 @@ namespace HealthDiseasePrediction.Models
     {
         [Display(Name ="Type your Heart pain Type")]
         [Range(1, 4, ErrorMessage = "We don't have this heart pain")]
+        [Required(ErrorMessage ="ERRR")]
         private int idChestPainType;
     
         public int IdChestPainType
@@ -22,17 +23,15 @@ namespace HealthDiseasePrediction.Models
             }
         }
         
-        [Range(30, 230, ErrorMessage = "Hiroshima xD")]
+        [Range(30, 230, ErrorMessage = "Give a valid Max Heart Rate Achived")]
         [Required(ErrorMessage = "Give a valid heart rate")]
         public float MaxHeartRateAchived { get; set; }
 
-        [Range(30, 230, ErrorMessage = "Hiroshima xD")]
+        [Range(30, 230, ErrorMessage = "Give a valid Oldpeak")]
         [Required(ErrorMessage = "Give a valid Oldpeak")]
         public float Oldpeak { get; set; }
 
-
-
-        public string predictedValue { get; set; }
+        public double prediction { get; set; } = 0;
 
     }
 }

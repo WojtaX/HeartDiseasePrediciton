@@ -11,23 +11,20 @@ namespace HealthDiseasePrediction.Controllers
     public class UsersController : Controller
     {
         // GET: Users
-          public ActionResult Index()
+          public ActionResult Predict()
         {
-            
             return View();
         }
      [HttpPost]
-        public ActionResult Savemodel(FormCollection collection)
+     [ValidateAntiForgeryToken]
+        public ActionResult Predict(UserModel user)
         {
-            UserModel model = new UserModel();
-            ViewData["IdChestPainType"] = collection["IdChestPainType"];
-            model.IdChestPainType= Convert.ToInt16( collection["IdChestPainType"] );
-            model.MaxHeartRateAchived = Convert.ToInt16(collection["MaxHeartRateAchived"]);
-            model.Oldpeak = Convert.ToInt16(collection["Oldpeak"]);
-
-            string t=Prediciton.Predict(model);
-            model.predictedValue = t;
-            return Content(t);
-        }
+            if (ModelState.IsValid)
+            {
+                user.prediction = Prediciton.Predict(user);
+                return View(user);
+            }
+            else return View();
+            }
     }
 }

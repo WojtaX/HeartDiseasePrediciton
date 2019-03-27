@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HeartDiseasePredictionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HeartDiseasePredictionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'HeartDiseasePrediction.dbo.ChestPainTypes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChestPainTypes">
@@ -105,6 +105,7 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
         <Function Name="Prediction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="model" Type="varchar" Mode="In" />
           <Parameter Name="query" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="test" Type="float" Mode="InOut" />
         </Function>
         <EntityContainer Name="HeartDiseasePredictionModelStoreContainer">
           <EntitySet Name="ChestPainTypes" EntityType="Self.ChestPainTypes" store:Type="Tables" store:Schema="dbo">
@@ -155,8 +156,7 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
     FROM [dbo].[sysdiagrams] AS [sysdiagrams]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HeartDiseasePredictionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -247,11 +247,12 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
             <Parameter Name="Oldpeak" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="ModelTraining">
-            <Parameter Name="trained_model" Mode="InOut" Type="Binary" />
+          <Parameter Name="trained_model" Mode="InOut" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="Prediction">
             <Parameter Name="model" Mode="In" Type="String" />
             <Parameter Name="query" Mode="In" Type="String" />
+            <Parameter Name="test" Mode="InOut" Type="Double" />
           </FunctionImport>
         </EntityContainer>
       </Schema>

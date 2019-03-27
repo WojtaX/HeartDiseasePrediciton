@@ -56,7 +56,7 @@ namespace HealthDiseasePrediction
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ModelTraining", trained_model);
         }
     
-        public virtual int Prediction(string model, string query)
+        public virtual int Prediction(string model, string query, ObjectParameter test)
         {
             var modelParameter = model != null ?
                 new ObjectParameter("model", model) :
@@ -66,7 +66,7 @@ namespace HealthDiseasePrediction
                 new ObjectParameter("query", query) :
                 new ObjectParameter("query", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Prediction", modelParameter, queryParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Prediction", modelParameter, queryParameter, test);
         }
     }
 }

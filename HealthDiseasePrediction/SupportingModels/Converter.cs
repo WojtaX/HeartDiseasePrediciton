@@ -27,7 +27,7 @@ namespace HealthDiseasePrediction.Models
                 return new SelectListItem()
                 {
                     Text = a.ChestPainName,
-                    Value = a.IDchestPain + 1.ToString(),
+                    Value = (a.IDchestPain + 1).ToString(),
                     Selected = false
                 };
             });
