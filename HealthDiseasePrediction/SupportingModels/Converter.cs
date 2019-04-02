@@ -10,7 +10,7 @@ namespace HealthDiseasePrediction.Models
     {
         public static  List<SelectListItem> ConvertData()
         {
-            List<ChestPainType> P = new List<ChestPainType>();
+            List<ChestPainType> ChestPainTypesList = new List<ChestPainType>();
             using (HeartDiseasePredictionEntities3 db = new HeartDiseasePredictionEntities3())
             {
                 var query = db.ChestPainTypes.SqlQuery("Select * from ChestPainTypes;").ToList();
@@ -18,16 +18,16 @@ namespace HealthDiseasePrediction.Models
                 {
                     foreach (var i in query)
                     {
-                        P.Add(new ChestPainType(i.IDchestPaintype, i.ChestPainName));
+                        ChestPainTypesList.Add(new ChestPainType(i.IDchestPaintype, i.ChestPainName));
                     }
                 }
             }
-            List<SelectListItem> item = P.ConvertAll(a =>
+            List<SelectListItem> item = ChestPainTypesList.ConvertAll(PainType =>
             {
                 return new SelectListItem()
                 {
-                    Text = a.ChestPainName,
-                    Value = (a.IDchestPain + 1).ToString(),
+                    Text = PainType.ChestPainName,
+                    Value = (PainType.IDchestPain + 1).ToString(),
                     Selected = false
                 };
             });

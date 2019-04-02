@@ -16,7 +16,7 @@ namespace HealthDiseasePrediction.Models
                 string query = "Select " + model.IdChestPainType.ToString() + ", " + model.MaxHeartRateAchived.ToString() + ", " + model.Oldpeak.ToString();
                 var predict = db.Prediction("XGBOOST", query,@test);
                 ObjectParameter @object = new ObjectParameter("object", test.Value);
-               return Convert.ToDouble(test.Value);
+               return Math.Round( Convert.ToDouble(test.Value)*100);
                             }
             
         }
