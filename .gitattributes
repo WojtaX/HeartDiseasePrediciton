@@ -3,6 +3,7 @@
 ###############################################################################
 * text=auto
  HeartDiseasePrediciton/HealthDiseasePrediction/Scripts/* linguist-vendored
+ *.css linguist-language=csharp
 ###############################################################################
 # Set default behavior for command prompt diff.
 #
