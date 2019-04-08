@@ -15,10 +15,10 @@ namespace HealthDiseasePrediction
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class HeartDiseasePredictionEntities3 : DbContext
+    public partial class HeartDiseasePredictionEntities5 : DbContext
     {
-        public HeartDiseasePredictionEntities3()
-            : base("name=HeartDiseasePredictionEntities3")
+        public HeartDiseasePredictionEntities5()
+            : base("name=HeartDiseasePredictionEntities5")
         {
         }
     
@@ -33,7 +33,7 @@ namespace HealthDiseasePrediction
         public virtual DbSet<RestingElectroCardiographicResult> RestingElectroCardiographicResults { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     
-        [DbFunction("HeartDiseasePredictionEntities3", "HDPFE")]
+        [DbFunction("HeartDiseasePredictionEntities5", "HDPFE")]
         public virtual IQueryable<HDPFE_Result> HDPFE(Nullable<int> idChestPainType, Nullable<double> maxHeartRateAchived, Nullable<double> oldpeak)
         {
             var idChestPainTypeParameter = idChestPainType.HasValue ?
@@ -48,7 +48,7 @@ namespace HealthDiseasePrediction
                 new ObjectParameter("Oldpeak", oldpeak) :
                 new ObjectParameter("Oldpeak", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<HDPFE_Result>("[HeartDiseasePredictionEntities3].[HDPFE](@IdChestPainType, @MaxHeartRateAchived, @Oldpeak)", idChestPainTypeParameter, maxHeartRateAchivedParameter, oldpeakParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<HDPFE_Result>("[HeartDiseasePredictionEntities5].[HDPFE](@IdChestPainType, @MaxHeartRateAchived, @Oldpeak)", idChestPainTypeParameter, maxHeartRateAchivedParameter, oldpeakParameter);
         }
     
         public virtual int ModelTraining(ObjectParameter trained_model)

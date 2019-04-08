@@ -28,7 +28,7 @@
             @Html.LabelFor(model => model.IdChestPainType, "Chest Pain Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.IdChestPainType, lista, new { htmlAttributes = new { @class = "form-control" } })
-            
+
             </div>
         </div>
 
@@ -36,7 +36,7 @@
             @Html.LabelFor(model => model.MaxHeartRateAchived, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MaxHeartRateAchived, new { htmlAttributes = new { @class = "form-control" } })
-      
+
             </div>
         </div>
 
@@ -44,7 +44,7 @@
             @Html.LabelFor(model => model.Oldpeak, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Oldpeak, new { htmlAttributes = new { @class = "form-control" } })
-       
+
             </div>
 
         </div>
@@ -56,11 +56,19 @@
 
 @Styles.Render("~/Content/Custom/HRPCss.css")
 
-    <div id="show-id" class="spinner-grow" style="width: 9rem; height: 9rem;" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
+<div id="show-id" class="spinner-grow" style="width: 9rem; height: 9rem;" role="status">
+    <span class="sr-only">Loading...</span>
+</div>
 
 <div class="PredictionWindows">
     <p>Based on your input, AI predicted propability that you have heart disease [%]</p>
     @Html.EditorFor(model => model.prediction, new { htmlAttributes = new { @class = "form-control" } })
+</div>
+
+<div id="anim " class="heart-rate">
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px" height="73px" viewBox="0 0 150 73" enable-background="new 0 0 150 73" xml:space="preserve">
+    <polyline fill="none" stroke="#009B9E" stroke-width="3" stroke-miterlimit="10" points="0,45.486 38.514,45.486 44.595,33.324 50.676,45.486 57.771,45.486 62.838,55.622 71.959,9 80.067,63.729 84.122,45.486 97.297,45.486 103.379,40.419 110.473,45.486 150,45.486" />
+    </svg>
+    <div class="fade-in"></div>
+    <div class="fade-out"></div>
 </div>

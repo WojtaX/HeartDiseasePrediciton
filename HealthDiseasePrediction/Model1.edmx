@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HeartDiseasePredictionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="HeartDiseasePredictionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'HeartDiseasePrediction.dbo.ChestPainTypes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChestPainTypes">
@@ -156,7 +156,8 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
     FROM [dbo].[sysdiagrams] AS [sysdiagrams]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HeartDiseasePredictionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -235,7 +236,7 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityContainer Name="HeartDiseasePredictionEntities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="HeartDiseasePredictionEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ChestPainTypes" EntityType="Self.ChestPainType" />
           <EntitySet Name="HDPModels" EntityType="Self.HDPModel" />
           <EntitySet Name="HeartDiseaseTrainingSets" EntityType="Self.HeartDiseaseTrainingSet" />
@@ -247,7 +248,7 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
             <Parameter Name="Oldpeak" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="ModelTraining">
-          <Parameter Name="trained_model" Mode="InOut" Type="Binary" />
+            <Parameter Name="trained_model" Mode="InOut" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="Prediction">
             <Parameter Name="model" Mode="In" Type="String" />
@@ -260,7 +261,7 @@ warning 6002: The table/view 'HeartDiseasePrediction.dbo.sysdiagrams' does not h
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HeartDiseasePredictionModelStoreContainer" CdmEntityContainer="HeartDiseasePredictionEntities3">
+        <EntityContainerMapping StorageEntityContainer="HeartDiseasePredictionModelStoreContainer" CdmEntityContainer="HeartDiseasePredictionEntities5">
           <EntitySetMapping Name="ChestPainTypes">
             <EntityTypeMapping TypeName="HeartDiseasePredictionModel.ChestPainType">
               <MappingFragment StoreEntitySet="ChestPainTypes">

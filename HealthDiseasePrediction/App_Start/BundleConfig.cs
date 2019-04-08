@@ -24,7 +24,8 @@ namespace HealthDiseasePrediction
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-superhero.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/Custom/HRPCss.css"));
         }
     }
 }
